@@ -101,6 +101,6 @@ public class RestApiImpl implements RestApi {
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         isConnected = (networkInfo != null && networkInfo.isConnectedOrConnecting());
 
-        return false;
+        return isConnected;
     }
 }
