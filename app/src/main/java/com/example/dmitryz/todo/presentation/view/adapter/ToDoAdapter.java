@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.dmitryz.todo.R;
 import com.example.dmitryz.todo.presentation.model.ToDoModel;
-import com.example.todo.R;
 
 import java.util.Collection;
 import java.util.Collections;
