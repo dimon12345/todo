@@ -1,14 +1,29 @@
 {
   "todo":[
     {
-      "id": "1",
-      "title":"CompositeSubscription",
-      "body":"add and clean subscribers onStop() and onCreate()"
+      "id": "7",
+      "title":"add margins to list and details pages",
+      "body":"add margins to text"
     },
     {
-      "id": "2",
-      "title":"handle change orientation",
-      "body":"fix crash if display orientation changed"
+      "id": "3",
+      "title":"add button new todo",
+      "body":"add button"
+    },
+    {
+      "id": "4",
+      "title":"add cache",
+      "body":"add cache"
+    },
+    {
+      "id": "5",
+      "title":"add addNewItem() to repository",
+      "body":"add button"
+    },
+    {
+      "id": "6",
+      "title":"add usecase addNewToDoItem()",
+      "body":"add button"
     }
   ]
 }
