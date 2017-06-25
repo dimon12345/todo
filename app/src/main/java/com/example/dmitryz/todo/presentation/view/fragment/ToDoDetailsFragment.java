@@ -71,7 +71,7 @@ public class ToDoDetailsFragment extends BaseFragment implements ToDoDetailsView
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View fragmentView = inflater.inflate(R.layout.fragment_todo_details, container, false);
-        ButterKnife.bind(this, fragmentView);
+        unbinder = ButterKnife.bind(this, fragmentView);
         return fragmentView;
     }
 
