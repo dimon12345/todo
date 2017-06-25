@@ -1,8 +1,14 @@
-[
-  {"title":"CompositeSubscription",
-    "body":"add and clean subscribers onStop() and onCreate()"
-  },
-  {"title":"CompositeSubscription copy",
-    "body":"add and clean subscribers onStop() and onCreate() copy"
-  }
-]
+{
+  "todo":[
+    {
+      "id": "1",
+      "title":"CompositeSubscription",
+      "body":"add and clean subscribers onStop() and onCreate()"
+    },
+    {
+      "id": "2",
+      "title":"CompositeSubscription copy",
+      "body":"add and clean subscribers onStop() and onCreate() copy"
+    }
+  ]
+}

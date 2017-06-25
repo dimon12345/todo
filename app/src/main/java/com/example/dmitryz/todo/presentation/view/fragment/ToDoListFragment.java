@@ -24,6 +24,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -80,8 +81,18 @@ public class ToDoListFragment extends BaseFragment implements ToDoListView {
             Bundle saveInstanceState) {
         final View fragmentView = inflater.inflate(R.layout.fragment_todo_list, container, false);
         unbinder = ButterKnife.bind(this, fragmentView);
+        //setupRetryButton();
         setupRecyclerView();
         return fragmentView;
+    }
+
+    private void setupRetryButton() {
+        bt_retry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToDoListFragment.this.todoListPresenter.retry();
+            }
+        });
     }
 
     @Override
@@ -188,4 +199,9 @@ public class ToDoListFragment extends BaseFragment implements ToDoListView {
                     }
                 }
             };
+
+    @OnClick(R.id.bt_retry)
+    void reloadToDoData() {
+        todoListPresenter.retry();
+    }
 }

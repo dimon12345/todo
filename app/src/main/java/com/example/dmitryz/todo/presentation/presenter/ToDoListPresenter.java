@@ -67,6 +67,10 @@ public class ToDoListPresenter implements Presenter {
         todoListView.viewToDo(todoModel);
     }
 
+    public void retry() {
+        loadToDoList();
+    }
+
     private void showViewLoading() {
         todoListView.showLoading();
     }

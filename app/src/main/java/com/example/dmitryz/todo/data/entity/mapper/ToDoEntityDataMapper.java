@@ -19,12 +19,9 @@ public class ToDoEntityDataMapper {
     ToDoEntityDataMapper() {}
 
     public ToDoItem transform(ToDoEntity entity) {
-        ToDoItem item = null;
-        if (entity != null) {
-            item = new ToDoItem(entity.getID());
-            item.setTitle(entity.getTitle());
-            item.setBody(entity.getBody());
-        }
+        ToDoItem item = new ToDoItem(entity.getID());
+        item.setTitle(entity.getTitle());
+        item.setBody(entity.getBody());
         return item;
     }
 
