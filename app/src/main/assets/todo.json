@@ -1,11 +1,6 @@
 {
   "todo":[
     {
-      "id": "7",
-      "title":"add margins to list and details pages",
-      "body":"add margins to text"
-    },
-    {
       "id": "3",
       "title":"add button new todo",
       "body":"add button"
