@@ -15,4 +15,6 @@ public interface ToDoRepository {
     Observable<List<ToDoItem>> getElements();
 
     Observable<ToDoItem> getElement(String id);
+
+    Observable<Boolean> addToDoItem(ToDoItem toDoItem);
 }

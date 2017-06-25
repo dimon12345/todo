@@ -16,6 +16,4 @@
         android:src="@android:drawable/ic_input_add"
         android:scaleType="fitCenter"
         app:fabSize="normal"/>
-
-
 </FrameLayout>

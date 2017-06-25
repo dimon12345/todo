@@ -9,16 +9,6 @@
       "id": "8",
       "title":"import todo.json to local cache",
       "body":"add cache"
-    },
-    {
-      "id": "5",
-      "title":"add addNewItem() to repository",
-      "body":"add button"
-    },
-    {
-      "id": "6",
-      "title":"add usecase addNewToDoItem()",
-      "body":"add button"
     }
   ]
 }

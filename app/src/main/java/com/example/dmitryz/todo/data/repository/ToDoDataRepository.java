@@ -54,4 +54,9 @@ public class ToDoDataRepository implements ToDoRepository {
             }
         });
     }
+
+    @Override
+    public Observable<Boolean> addToDoItem(ToDoItem toDoItem) {
+        return Observable.error(new Exception("not implemented"));
+    }
 }

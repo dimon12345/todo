@@ -3,6 +3,7 @@ package com.example.dmitryz.todo.presentation.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 
 import com.example.dmitryz.todo.R;
@@ -11,6 +12,8 @@ import com.example.dmitryz.todo.presentation.internal.di.components.DaggerToDoCo
 import com.example.dmitryz.todo.presentation.internal.di.components.ToDoComponent;
 import com.example.dmitryz.todo.presentation.model.ToDoModel;
 import com.example.dmitryz.todo.presentation.view.fragment.ToDoListFragment;
+
+import butterknife.OnClick;
 
 /**
  * Created by q on 05.06.17.
@@ -53,5 +56,4 @@ public class ToDoListActivity extends BaseActivity implements HasComponent<ToDoC
     public void onToDoClicked(ToDoModel todoModel) {
         this.navigator.navigateToToDoDetails(this, todoModel.getId());
     }
-
 }

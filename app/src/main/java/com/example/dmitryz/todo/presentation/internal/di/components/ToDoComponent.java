@@ -3,6 +3,7 @@ package com.example.dmitryz.todo.presentation.internal.di.components;
 import com.example.dmitryz.todo.presentation.internal.di.PerActivity;
 import com.example.dmitryz.todo.presentation.internal.di.modules.ActivityModule;
 import com.example.dmitryz.todo.presentation.internal.di.modules.ToDoModule;
+import com.example.dmitryz.todo.presentation.view.fragment.AddToDoItemFragment;
 import com.example.dmitryz.todo.presentation.view.fragment.ToDoDetailsFragment;
 import com.example.dmitryz.todo.presentation.view.fragment.ToDoListFragment;
 
@@ -17,4 +18,5 @@ import dagger.Component;
 public interface ToDoComponent {
     void inject(ToDoListFragment todoListFragment);
     void inject(ToDoDetailsFragment todoDetailsFragment);
+    void inject(AddToDoItemFragment addToDoItemFragment);
 }

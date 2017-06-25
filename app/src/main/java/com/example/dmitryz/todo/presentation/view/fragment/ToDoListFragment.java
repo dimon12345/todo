@@ -68,13 +68,13 @@ public class ToDoListFragment extends BaseFragment implements ToDoListView {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         if (activity instanceof ToDoListListener) {
-            this.todoListListener = (ToDoListListener) activity;
+            todoListListener = (ToDoListListener) activity;
         }
     }
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getComponent(ToDoComponent.class).inject(this);
+        getComponent(ToDoComponent.class).inject(this);
     }
 
     @Override
@@ -89,22 +89,22 @@ public class ToDoListFragment extends BaseFragment implements ToDoListView {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.todoListPresenter.setView(this);
+        todoListPresenter.setView(this);
         if (savedInstanceState == null) {
-            this.loadToDoList();
+            loadToDoList();
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        this.todoListPresenter.resume();
+        todoListPresenter.resume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        this.todoListPresenter.pause();
+        todoListPresenter.pause();
     }
 
     @Override
@@ -116,13 +116,13 @@ public class ToDoListFragment extends BaseFragment implements ToDoListView {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        this.todoListPresenter.destroy();
+        todoListPresenter.destroy();
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        this.todoListListener = null;
+        todoListListener = null;
     }
 
     @Override
@@ -157,7 +157,7 @@ public class ToDoListFragment extends BaseFragment implements ToDoListView {
     @Override
     public void viewToDo(ToDoModel todoModel) {
         if (todoListListener != null) {
-            this.todoListListener.onToDoClicked(todoModel);
+            todoListListener.onToDoClicked(todoModel);
         }
     }
 
@@ -198,6 +198,6 @@ public class ToDoListFragment extends BaseFragment implements ToDoListView {
 
     @OnClick(R.id.fab)
     void doSomentingPromotional() {
-        Log.e("fragment", "not implemented");
+        navigator.addNewItem(context());
     }
 }

@@ -9,23 +9,17 @@ import com.example.dmitryz.todo.R;
 import com.example.dmitryz.todo.presentation.internal.di.HasComponent;
 import com.example.dmitryz.todo.presentation.internal.di.components.DaggerToDoComponent;
 import com.example.dmitryz.todo.presentation.internal.di.components.ToDoComponent;
-import com.example.dmitryz.todo.presentation.view.fragment.ToDoDetailsFragment;
+import com.example.dmitryz.todo.presentation.view.fragment.AddToDoItemFragment;
 
 /**
- * Created by q on 10.06.17.
+ * Created by dmitryz on 6/25/17.
  */
 
-public class ToDoDetailsActivity extends BaseActivity implements HasComponent<ToDoComponent> {
-    private static final String INTENT_EXTRA_PARAM_TODO_ID = "com.example.dmitryz.INTENT_PARAM_USER_ID";
-    private static final String INSTANCE_STATE_PARAM_TODO_ID = "com.example.dmitryz.INSTANCE_STATE_PARAM_USER_ID";
-
-    public static Intent getCallingIntent(Context context, String todoId) {
-        Intent callingIntent = new Intent(context, ToDoDetailsActivity.class);
-        callingIntent.putExtra(INTENT_EXTRA_PARAM_TODO_ID, todoId);
-        return callingIntent;
+public class AddToDoActivity extends BaseActivity implements HasComponent<ToDoComponent> {
+    public static Intent getCallingIntent(Context context) {
+        return new Intent(context, AddToDoActivity.class);
     }
 
-    private String todoId;
     private ToDoComponent todoComponent;
 
     @Override
@@ -33,26 +27,19 @@ public class ToDoDetailsActivity extends BaseActivity implements HasComponent<To
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_layout);
-
-        initializeActivity(savedInstanceState);
         initializeInjector();
+        if (savedInstanceState == null) {
+            addFragment(R.id.fragmentContainer, new AddToDoItemFragment());
+        }
+
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         if (outState != null) {
-            outState.putString(INSTANCE_STATE_PARAM_TODO_ID, todoId);
+//            outState.putString(INSTANCE_STATE_PARAM_TODO_ID, todoId);
         }
         super.onSaveInstanceState(outState);
-    }
-
-    private void initializeActivity(Bundle savedInstanceState) {
-        if (savedInstanceState == null) {
-            todoId = getIntent().getStringExtra(INTENT_EXTRA_PARAM_TODO_ID);
-            addFragment(R.id.fragmentContainer, ToDoDetailsFragment.forToDo(todoId));
-        } else {
-            todoId = savedInstanceState.getString(INSTANCE_STATE_PARAM_TODO_ID);
-        }
     }
 
     private void initializeInjector() {
