@@ -6,6 +6,7 @@ import com.example.dmitryz.todo.data.cache.ToDoCache;
 import com.example.dmitryz.todo.data.entity.mapper.ToDoEntityJsonMapper;
 import com.example.dmitryz.todo.data.net.RestApi;
 import com.example.dmitryz.todo.data.net.RestApiImpl;
+import com.google.gson.Gson;
 
 import javax.inject.Inject;
 
@@ -32,7 +33,8 @@ public class ToDoDataStoreFactory {
         if (!this.todoCache.isExpired() && this.todoCache.isCached(id)) {
             toDoDataStore = new DiskToDoDataStore(this.todoCache);
         } else {
-            toDoDataStore = createCloudDataStore();
+            //toDoDataStore = createCloudDataStore();
+            toDoDataStore = createAssetDataStore();
         }
         return toDoDataStore;
     }
@@ -42,5 +44,9 @@ public class ToDoDataStoreFactory {
         final RestApi restApi = new RestApiImpl(this.context, todoEntityJsonMapper);
 
         return new CloudToDoDataStore(restApi, this.todoCache);
+    }
+
+    public ToDoDataStore createAssetDataStore() {
+        return new AssetToDoDataStore(context, "todo.json");
     }
 }

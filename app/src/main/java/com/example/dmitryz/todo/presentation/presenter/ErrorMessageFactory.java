@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.dmitryz.todo.data.exception.NetworkConnectionException;
 import com.example.dmitryz.todo.data.exception.ToDoItemNotFound;
+import com.google.gson.JsonSyntaxException;
 
 /**
  * Created by q on 09.06.17.
@@ -21,6 +22,9 @@ class ErrorMessageFactory {
             message = "There is no internet connection";
         } else if (exception instanceof ToDoItemNotFound) {
             message = "Cannot retrieve user data. Check your internet connection";
+        } else if (exception instanceof JsonSyntaxException) {
+            JsonSyntaxException e = (JsonSyntaxException)exception;
+            message = "Json exception: " + e.getMessage();
         }
 
         return message;

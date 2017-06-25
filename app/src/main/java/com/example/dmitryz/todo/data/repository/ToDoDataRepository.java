@@ -33,7 +33,8 @@ public class ToDoDataRepository implements ToDoRepository {
 
     @Override
     public Observable<List<ToDoItem>> getElements() {
-        final ToDoDataStore toDoDataStore = this.toDoDataStoreFactory.createCloudDataStore();
+        //final ToDoDataStore toDoDataStore = this.toDoDataStoreFactory.createCloudDataStore();
+        final ToDoDataStore toDoDataStore = this.toDoDataStoreFactory.createAssetDataStore();
         return toDoDataStore.todoEntityList().map(new Function<List<ToDoEntity>, List<ToDoItem>>() {
             @Override
             public List<ToDoItem> apply(List<ToDoEntity> toDoEntities) throws Exception {

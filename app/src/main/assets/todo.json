@@ -1,0 +1,8 @@
+[
+  {"title":"CompositeSubscription",
+    "body":"add and clean subscribers onStop() and onCreate()"
+  },
+  {"title":"CompositeSubscription copy",
+    "body":"add and clean subscribers onStop() and onCreate() copy"
+  }
+]
