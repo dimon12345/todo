@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.dmitryz.todo.data.entity.ToDoEntity;
 import com.example.dmitryz.todo.data.entity.ToDoEntityList;
+import com.example.dmitryz.todo.data.exception.ToDoItemNotFound;
 import com.example.dmitryz.todo.data.repository.datasource.ToDoDataStore;
 import com.example.dmitryz.todo.data.repository.utils.AssetLoader;
 import com.google.gson.Gson;
@@ -45,7 +46,18 @@ public class AssetToDoDataStore implements ToDoDataStore {
     }
 
     @Override
-    public Observable<ToDoEntity> todoEntityDetails(String id) {
-        return Observable.error(new Exception("not implemented"));
+    public Observable<ToDoEntity> todoEntityDetails(String todoId) {
+        final String json = AssetLoader.loadJSONFromAsset(context, filename);
+        try {
+            ToDoEntityList todoEntityList = gson.fromJson(json, ToDoEntityList.class);
+            for( ToDoEntity entity : todoEntityList.getToDoEntities() ) {
+                if( entity.getID().equals(todoId)) {
+                    return Observable.just(entity);
+                }
+            }
+            return Observable.error(new ToDoItemNotFound());
+        } catch (JsonSyntaxException exception) {
+            return Observable.error(exception);
+        }
     }
 }
