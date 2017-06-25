@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,18 +82,8 @@ public class ToDoListFragment extends BaseFragment implements ToDoListView {
             Bundle saveInstanceState) {
         final View fragmentView = inflater.inflate(R.layout.fragment_todo_list, container, false);
         unbinder = ButterKnife.bind(this, fragmentView);
-        //setupRetryButton();
         setupRecyclerView();
         return fragmentView;
-    }
-
-    private void setupRetryButton() {
-        bt_retry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ToDoListFragment.this.todoListPresenter.retry();
-            }
-        });
     }
 
     @Override
@@ -203,5 +194,10 @@ public class ToDoListFragment extends BaseFragment implements ToDoListView {
     @OnClick(R.id.bt_retry)
     void reloadToDoData() {
         todoListPresenter.retry();
+    }
+
+    @OnClick(R.id.fab)
+    void doSomentingPromotional() {
+        Log.e("fragment", "not implemented");
     }
 }

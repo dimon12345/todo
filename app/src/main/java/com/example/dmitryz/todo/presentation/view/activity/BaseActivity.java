@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.example.dmitryz.todo.presentation.AndroidApplication;
 import com.example.dmitryz.todo.presentation.internal.di.components.ApplicationComponent;
@@ -16,7 +17,7 @@ import javax.inject.Inject;
  * Created by q on 03.06.17.
  */
 
-public class BaseActivity extends Activity {
+public class BaseActivity extends AppCompatActivity {
 
     @Inject
     Navigator navigator;
