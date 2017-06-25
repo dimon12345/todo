@@ -35,10 +35,7 @@ public class AssetToDoDataStore implements ToDoDataStore {
 
     @Override
     public Observable<List<ToDoEntity>> todoEntityList() {
-
         final String json = AssetLoader.loadJSONFromAsset(context, filename);
-//        Type collectionType = new TypeToken<Collection<ToDoEntity>>(){}.getType();
-
         try {
             ToDoEntityList todoEntityList = gson.fromJson(json, ToDoEntityList.class);
             return Observable.just(todoEntityList.getToDoEntities());
@@ -49,6 +46,6 @@ public class AssetToDoDataStore implements ToDoDataStore {
 
     @Override
     public Observable<ToDoEntity> todoEntityDetails(String id) {
-        return null;
+        return Observable.error(new Exception("not implemented"));
     }
 }

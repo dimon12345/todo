@@ -19,6 +19,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -155,5 +156,10 @@ public class ToDoDetailsFragment extends BaseFragment implements ToDoDetailsView
     private String currentToDoId() {
         final Bundle arguments = getArguments();
         return arguments.getString(PARAM_TODO_ID);
+    }
+
+    @OnClick(R.id.bt_retry)
+    void reloadDetails() {
+        todoDetailsPresenter.retry();
     }
 }

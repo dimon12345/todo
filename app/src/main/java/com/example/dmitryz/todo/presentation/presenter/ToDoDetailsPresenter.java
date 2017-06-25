@@ -12,9 +12,7 @@ import com.example.dmitryz.todo.presentation.view.ToDoDetailsView;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.observers.DisposableObserver;
 
 /**
  * Created by q on 09.06.17.
@@ -25,6 +23,7 @@ public class ToDoDetailsPresenter implements Presenter {
 
     private final GetToDoDetails getToDoDetailsUseCase;
     private final ToDoModelDataMapper todoModelDataMapper;
+    private String todoId;
 
     @Inject
     public ToDoDetailsPresenter(GetToDoDetails getToDoDetailsUseCase,
@@ -54,8 +53,13 @@ public class ToDoDetailsPresenter implements Presenter {
     }
 
     public void initialize(String todoId) {
+        loadToDoDetails(todoId);
+    }
+
+    private void loadToDoDetails(String todoId) {
         hideViewRetry();
         showViewLoading();
+        this.todoId = todoId;
         getToDoDetails(todoId);
     }
 
@@ -88,6 +92,13 @@ public class ToDoDetailsPresenter implements Presenter {
     private void showToDoDetailsInView(ToDoItem todoItem) {
         final ToDoModel todoModel = todoModelDataMapper.transform(todoItem);
         todoDetailsView.renderToDo(todoModel);
+    }
+
+    public void retry() {
+        if(todoId == null) {
+            return;
+        }
+        loadToDoDetails(todoId);
     }
 
     private class ToDoDetailsObserver extends DefaultObserver<ToDoItem> {

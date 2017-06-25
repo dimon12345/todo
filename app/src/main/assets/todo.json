@@ -7,8 +7,8 @@
     },
     {
       "id": "2",
-      "title":"CompositeSubscription copy",
-      "body":"add and clean subscribers onStop() and onCreate() copy"
+      "title":"handle change orientation",
+      "body":"fix crash if display orientation changed"
     }
   ]
 }

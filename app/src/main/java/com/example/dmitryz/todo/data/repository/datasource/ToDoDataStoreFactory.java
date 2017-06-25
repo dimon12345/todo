@@ -33,7 +33,6 @@ public class ToDoDataStoreFactory {
         if (!this.todoCache.isExpired() && this.todoCache.isCached(id)) {
             toDoDataStore = new DiskToDoDataStore(this.todoCache);
         } else {
-            //toDoDataStore = createCloudDataStore();
             toDoDataStore = createAssetDataStore();
         }
         return toDoDataStore;
