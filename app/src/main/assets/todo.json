@@ -9,6 +9,11 @@
       "id": "8",
       "title":"import todo.json to local cache",
       "body":"add cache"
+    },
+    {
+      "id": "9",
+      "title":"support split mode",
+      "body":"support working in the Android split mode"
     }
   ]
 }
