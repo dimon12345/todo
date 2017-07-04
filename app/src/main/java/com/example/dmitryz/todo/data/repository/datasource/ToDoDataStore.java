@@ -13,4 +13,5 @@ import io.reactivex.Observable;
 public interface ToDoDataStore {
     Observable<List<ToDoEntity>> todoEntityList();
     Observable<ToDoEntity> todoEntityDetails(final String id);
+    Observable<Void> addEntity(ToDoEntity entity);
 }

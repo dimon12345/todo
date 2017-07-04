@@ -30,4 +30,10 @@ class DiskToDoDataStore implements ToDoDataStore {
     public Observable<ToDoEntity> todoEntityDetails(String id) {
         return this.toDoCache.get(id);
     }
+
+    @Override
+    public Observable<Void> addEntity(ToDoEntity entity) {
+        return Observable.error(new Throwable("unsupported operation"));
+    }
+
 }

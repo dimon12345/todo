@@ -60,4 +60,9 @@ public class AssetToDoDataStore implements ToDoDataStore {
             return Observable.error(exception);
         }
     }
+
+    @Override
+    public Observable<Void> addEntity(ToDoEntity entity) {
+        return Observable.error(new Throwable("unsupported operation"));
+    }
 }

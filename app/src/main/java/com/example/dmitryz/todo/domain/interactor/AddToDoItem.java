@@ -13,7 +13,7 @@ import io.reactivex.Observable;
  * Created by dmitryz on 6/26/17.
  */
 
-public class AddToDoItem  extends UseCase<Boolean, ToDoItem>  {
+public class AddToDoItem  extends UseCase<Void, ToDoItem>  {
     private final ToDoRepository itemsRepository;
 
 
@@ -24,7 +24,7 @@ public class AddToDoItem  extends UseCase<Boolean, ToDoItem>  {
     }
 
     @Override
-    Observable<Boolean> buildUseCaseObservable(ToDoItem toDoItem) {
+    Observable<Void> buildUseCaseObservable(ToDoItem toDoItem) {
         return itemsRepository.addToDoItem(toDoItem);
     }
 }

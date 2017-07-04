@@ -1,19 +1,19 @@
 {
   "todo":[
     {
-      "id": "4",
-      "title":"add local cache",
-      "body":"add cache"
+      "id": "10",
+      "title":"remove load data step",
+      "body":"remove useless step to load data"
     },
     {
-      "id": "8",
-      "title":"import todo.json to local cache",
-      "body":"add cache"
+      "id": "11",
+      "title":"allow delete items",
+      "body":"use can delete item by swipe"
     },
     {
-      "id": "9",
-      "title":"support split mode",
-      "body":"support working in the Android split mode"
+      "id": "12",
+      "title":"cancel delete operation",
+      "body":"show notification with \"undo\" button"
     }
   ]
 }

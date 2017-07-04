@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.dmitryz.todo.data.entity.ToDoEntity;
 import com.example.dmitryz.todo.data.entity.mapper.ToDoEntityDataMapper;
+import com.example.dmitryz.todo.data.entity.mapper.ToDoItemDataMapper;
 import com.example.dmitryz.todo.data.repository.datasource.ToDoDataStore;
 import com.example.dmitryz.todo.data.repository.datasource.ToDoDataStoreFactory;
 import com.example.dmitryz.todo.domain.ToDoItem;
@@ -24,18 +25,21 @@ public class ToDoDataRepository implements ToDoRepository {
 
     private final ToDoDataStoreFactory toDoDataStoreFactory;
     private final ToDoEntityDataMapper toDoEntityDataMapper;
+    private final ToDoItemDataMapper toDoItemDataMapper;
 
     @Inject
     ToDoDataRepository(ToDoDataStoreFactory dataStoreFactory,
-                       ToDoEntityDataMapper toDoEntityDataMapper) {
+                       ToDoEntityDataMapper toDoEntityDataMapper,
+                       ToDoItemDataMapper toDoItemDataMapper) {
         this.toDoDataStoreFactory = dataStoreFactory;
         this.toDoEntityDataMapper = toDoEntityDataMapper;
+        this.toDoItemDataMapper = toDoItemDataMapper;
     }
 
 
     @Override
     public Observable<List<ToDoItem>> getElements() {
-        final ToDoDataStore toDoDataStore = this.toDoDataStoreFactory.createAssetDataStore();
+        final ToDoDataStore toDoDataStore = this.toDoDataStoreFactory.createSQLiteDataStore();
         return toDoDataStore.todoEntityList().map(new Function<List<ToDoEntity>, List<ToDoItem>>() {
             @Override
             public List<ToDoItem> apply(List<ToDoEntity> toDoEntities) throws Exception {
@@ -56,7 +60,10 @@ public class ToDoDataRepository implements ToDoRepository {
     }
 
     @Override
-    public Observable<Boolean> addToDoItem(ToDoItem toDoItem) {
-        return Observable.error(new Exception("not implemented"));
+    public Observable<Void> addToDoItem(ToDoItem toDoItem) {
+        final ToDoDataStore toDoDataStore = this.toDoDataStoreFactory.createSQLiteDataStore();
+
+        ToDoEntity toDoEntity = toDoItemDataMapper.transform(toDoItem);
+        return toDoDataStore.addEntity(toDoEntity);
     }
 }

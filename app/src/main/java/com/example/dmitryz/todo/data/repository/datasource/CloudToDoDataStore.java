@@ -39,6 +39,8 @@ class CloudToDoDataStore implements ToDoDataStore {
         });
     }
 
-    private void onNext() {
+    @Override
+    public Observable<Void> addEntity(ToDoEntity entity) {
+        return Observable.error(new Throwable("unsupported operation"));
     }
 }

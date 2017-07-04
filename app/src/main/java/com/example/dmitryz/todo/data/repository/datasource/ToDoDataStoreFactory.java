@@ -33,7 +33,7 @@ public class ToDoDataStoreFactory {
         if (!this.todoCache.isExpired() && this.todoCache.isCached(id)) {
             toDoDataStore = new DiskToDoDataStore(this.todoCache);
         } else {
-            toDoDataStore = createAssetDataStore();
+            toDoDataStore = createSQLiteDataStore();
         }
         return toDoDataStore;
     }
@@ -45,7 +45,11 @@ public class ToDoDataStoreFactory {
         return new CloudToDoDataStore(restApi, this.todoCache);
     }
 
-    public ToDoDataStore createAssetDataStore() {
+    public ToDoDataStore createAssetDataStore2() {
         return new AssetToDoDataStore(context, "todo.json");
+    }
+
+    public ToDoDataStore createSQLiteDataStore() {
+        return new SQLiteToDoDataStore(context);
     }
 }
