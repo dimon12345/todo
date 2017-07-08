@@ -39,8 +39,7 @@ public class ToDoDataRepository implements ToDoRepository {
 
     @Override
     public Observable<List<ToDoItem>> getElements() {
-        final ToDoDataStore toDoDataStore = this.toDoDataStoreFactory.createSQLiteDataStore();
-        return toDoDataStore.todoEntityList().map(new Function<List<ToDoEntity>, List<ToDoItem>>() {
+        return getToDoDataStore().todoEntityList().map(new Function<List<ToDoEntity>, List<ToDoItem>>() {
             @Override
             public List<ToDoItem> apply(List<ToDoEntity> toDoEntities) throws Exception {
                 return toDoEntityDataMapper.transform(toDoEntities);
@@ -50,8 +49,7 @@ public class ToDoDataRepository implements ToDoRepository {
 
     @Override
     public Observable<ToDoItem> getElement(String id) {
-        final ToDoDataStore toDoDataStore = this.toDoDataStoreFactory.create(id);
-        return toDoDataStore.todoEntityDetails(id).map(new Function<ToDoEntity, ToDoItem>() {
+        return getToDoDataStore().todoEntityDetails(id).map(new Function<ToDoEntity, ToDoItem>() {
             @Override
             public ToDoItem apply(ToDoEntity todoEntity) throws Exception {
                 return toDoEntityDataMapper.transform(todoEntity);
@@ -61,9 +59,16 @@ public class ToDoDataRepository implements ToDoRepository {
 
     @Override
     public Observable<Void> addToDoItem(ToDoItem toDoItem) {
-        final ToDoDataStore toDoDataStore = this.toDoDataStoreFactory.createSQLiteDataStore();
-
         ToDoEntity toDoEntity = toDoItemDataMapper.transform(toDoItem);
-        return toDoDataStore.addEntity(toDoEntity);
+        return getToDoDataStore().addEntity(toDoEntity);
+    }
+
+    @Override
+    public Observable<Void> reset() {
+        return getToDoDataStore().reset();
+    }
+
+    ToDoDataStore getToDoDataStore() {
+        return this.toDoDataStoreFactory.createSQLiteDataStore();
     }
 }

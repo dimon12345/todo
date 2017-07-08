@@ -20,7 +20,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".presentation.view.activity.ToDoDetailsActivity" />
-        <activity android:name=".presentation.view.activity.ToDoListActivity" />
         <activity android:name=".presentation.view.activity.AddToDoActivity" />
     </application>
 

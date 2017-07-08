@@ -14,10 +14,12 @@ import android.widget.RelativeLayout;
 import com.example.dmitryz.todo.R;
 import com.example.dmitryz.todo.presentation.internal.di.components.ToDoComponent;
 import com.example.dmitryz.todo.presentation.model.ToDoModel;
+import com.example.dmitryz.todo.presentation.presenter.FloatingActionPresenter;
 import com.example.dmitryz.todo.presentation.presenter.ToDoListPresenter;
 import com.example.dmitryz.todo.presentation.view.ToDoListView;
 import com.example.dmitryz.todo.presentation.view.adapter.ToDoAdapter;
 import com.example.dmitryz.todo.presentation.view.adapter.ToDoLayoutManager;
+import com.github.clans.fab.FloatingActionMenu;
 
 import java.util.Collection;
 
@@ -41,6 +43,9 @@ public class ToDoListFragment extends BaseFragment implements ToDoListView {
     @Inject
     ToDoListPresenter todoListPresenter;
 
+    @Inject
+    FloatingActionPresenter floatingActionPresenter;
+
     private Unbinder unbinder;
 
     @Inject
@@ -57,6 +62,17 @@ public class ToDoListFragment extends BaseFragment implements ToDoListView {
 
     @BindView(R.id.bt_retry)
     Button bt_retry;
+
+    @BindView(R.id.fab_menu)
+    FloatingActionMenu fab_menu;
+
+    private boolean closeFloatingActionMenu(boolean animated) {
+        if (fab_menu != null && fab_menu.isOpened()) {
+            fab_menu.close(animated);
+            return true;
+        }
+        return false;
+    }
 
     ToDoListListener todoListListener;
 
@@ -196,8 +212,16 @@ public class ToDoListFragment extends BaseFragment implements ToDoListView {
         todoListPresenter.retry();
     }
 
-    @OnClick(R.id.fab)
-    void doSomentingPromotional() {
+    @OnClick(R.id.add_item)
+    void addToDoItem() {
         navigator.addNewItem(context());
+        closeFloatingActionMenu(false);
     }
+
+    @OnClick(R.id.reload_from_json)
+    void reloadFromJson() {
+        floatingActionPresenter.reset();
+        closeFloatingActionMenu(false);
+    }
+
 }

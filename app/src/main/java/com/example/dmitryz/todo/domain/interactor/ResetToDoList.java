@@ -10,21 +10,21 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 
 /**
- * Created by dmitryz on 6/26/17.
+ * Created by dmitryz on 7/8/17.
  */
 
-public class AddToDoItem extends UseCase<Void, ToDoItem> {
+public class ResetToDoList extends UseCase<Void, Void> {
+
     private final ToDoRepository itemsRepository;
 
-
     @Inject
-    AddToDoItem(ToDoRepository itemsRepository, ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread) {
+    ResetToDoList(ToDoRepository itemsRepository, ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread) {
         super(threadExecutor, postExecutionThread);
         this.itemsRepository = itemsRepository;
     }
 
     @Override
-    Observable<Void> buildUseCaseObservable(ToDoItem toDoItem) {
-        return itemsRepository.addToDoItem(toDoItem);
+    Observable<Void> buildUseCaseObservable(Void unused) {
+        return itemsRepository.reset();
     }
 }

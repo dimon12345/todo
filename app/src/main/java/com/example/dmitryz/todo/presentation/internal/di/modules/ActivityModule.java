@@ -1,6 +1,7 @@
 package com.example.dmitryz.todo.presentation.internal.di.modules;
 
 import android.app.Activity;
+import android.content.Context;
 
 import com.example.dmitryz.todo.presentation.internal.di.PerActivity;
 

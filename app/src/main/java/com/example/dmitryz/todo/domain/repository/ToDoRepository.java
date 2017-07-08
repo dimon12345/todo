@@ -17,4 +17,6 @@ public interface ToDoRepository {
     Observable<ToDoItem> getElement(String id);
 
     Observable<Void> addToDoItem(ToDoItem toDoItem);
+
+    Observable<Void> reset();
 }

@@ -122,4 +122,5 @@ public class ToDoListPresenter implements Presenter {
             ToDoListPresenter.this.showToDoCollectionInView(todoItems);
         }
     }
+
 }

@@ -13,6 +13,8 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * Created by dmitryz on 7/4/17.
  */
@@ -27,13 +29,13 @@ public class ToDoSQLiteOpenHelper extends SQLiteOpenHelper {
             "( _id INTEGER PRIMARY KEY , "+
             " title TEXT, body TEXT)";
     final String DROP_TABLE = "DROP TABLE IF EXISTS "+TABLE_NAME;
-    final String DATA_FILE_NAME = "data.txt";
     private final String DEBUG_TAG = "DBHelper";
 
     Context context;
 
     public ToDoSQLiteOpenHelper(Context context) {
         super(context, DB_NAME, null, DB_VER);
+
         Log.d(DEBUG_TAG,"constructor called");
         this.context = context;
     }
@@ -47,6 +49,11 @@ public class ToDoSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL(DROP_TABLE);
+        onCreate(db);
+    }
+
+    public void reset(SQLiteDatabase db) {
         db.execSQL(DROP_TABLE);
         onCreate(db);
     }

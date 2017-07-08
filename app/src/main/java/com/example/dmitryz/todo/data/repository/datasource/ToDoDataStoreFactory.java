@@ -28,25 +28,7 @@ public class ToDoDataStoreFactory {
     }
 
     public ToDoDataStore create(String id) {
-        ToDoDataStore toDoDataStore;
-
-        if (!this.todoCache.isExpired() && this.todoCache.isCached(id)) {
-            toDoDataStore = new DiskToDoDataStore(this.todoCache);
-        } else {
-            toDoDataStore = createSQLiteDataStore();
-        }
-        return toDoDataStore;
-    }
-
-    public ToDoDataStore createCloudDataStore() {
-        final ToDoEntityJsonMapper todoEntityJsonMapper = new ToDoEntityJsonMapper();
-        final RestApi restApi = new RestApiImpl(this.context, todoEntityJsonMapper);
-
-        return new CloudToDoDataStore(restApi, this.todoCache);
-    }
-
-    public ToDoDataStore createAssetDataStore2() {
-        return new AssetToDoDataStore(context, "todo.json");
+        return createSQLiteDataStore();
     }
 
     public ToDoDataStore createSQLiteDataStore() {

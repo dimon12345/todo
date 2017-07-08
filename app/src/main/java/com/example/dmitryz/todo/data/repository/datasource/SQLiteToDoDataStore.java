@@ -41,8 +41,7 @@ public class SQLiteToDoDataStore implements ToDoDataStore {
 
     @Override
     public Observable<List<ToDoEntity>> todoEntityList() {
-        ToDoSQLiteOpenHelper sqLiteOpenHelper = new ToDoSQLiteOpenHelper(context);
-        SQLiteDatabase db = sqLiteOpenHelper.getReadableDatabase();
+        SQLiteDatabase db = getSQLiteHelper().getReadableDatabase();
 
 
         Cursor cursor = db.query(
@@ -73,8 +72,7 @@ public class SQLiteToDoDataStore implements ToDoDataStore {
 
     @Override
     public Observable<ToDoEntity> todoEntityDetails(String id) {
-        ToDoSQLiteOpenHelper sqLiteOpenHelper = new ToDoSQLiteOpenHelper(context);
-        SQLiteDatabase db = sqLiteOpenHelper.getReadableDatabase();
+        SQLiteDatabase db = getSQLiteHelper().getReadableDatabase();
 
         Cursor cursor = db.query(
                 TABLE_NAME,
@@ -105,8 +103,7 @@ public class SQLiteToDoDataStore implements ToDoDataStore {
         values.put(COLUMN_NAME_TITLE, entity.getTitle());
         values.put(COLUMN_NAME_BODY, entity.getBody());
 
-        ToDoSQLiteOpenHelper sqLiteOpenHelper = new ToDoSQLiteOpenHelper(context);
-        SQLiteDatabase db = sqLiteOpenHelper.getReadableDatabase();
+        SQLiteDatabase db = getSQLiteHelper().getReadableDatabase();
 
         long newRowId;
         newRowId = db.insert(
@@ -114,5 +111,16 @@ public class SQLiteToDoDataStore implements ToDoDataStore {
                 null,
                 values);
         return Observable.empty();
+    }
+
+    @Override
+    public Observable<Void> reset() {
+        SQLiteDatabase db = getSQLiteHelper().getReadableDatabase();
+        getSQLiteHelper().reset(db);
+        return Observable.empty();
+    }
+
+    private ToDoSQLiteOpenHelper getSQLiteHelper() {
+        return new ToDoSQLiteOpenHelper(context);
     }
 }

@@ -1,16 +1,6 @@
 {
   "todo":[
     {
-      "id": "10",
-      "title":"inject context to sqlite helper",
-      "body":"inject context to sqlite helper"
-    },
-    {
-      "id": "11",
-      "title":"remove load data step",
-      "body":"remove useless step to load data"
-    },
-    {
       "id": "12",
       "title":"reimport from sqlite action",
       "body":"add action for drop db and reimport data from sqlite"

@@ -5,7 +5,6 @@ import android.content.Intent;
 
 import com.example.dmitryz.todo.presentation.view.activity.AddToDoActivity;
 import com.example.dmitryz.todo.presentation.view.activity.ToDoDetailsActivity;
-import com.example.dmitryz.todo.presentation.view.activity.ToDoListActivity;
 
 import javax.inject.Inject;
 
@@ -17,13 +16,6 @@ public class Navigator {
 
     @Inject
     public Navigator() {
-    }
-
-    public void navigateToToDoList(Context context) {
-        if (context != null) {
-            Intent intentToLaunch = ToDoListActivity.getCallingIntent(context);
-            context.startActivity(intentToLaunch);
-        }
     }
 
     public void navigateToToDoDetails(Context context, String id) {
