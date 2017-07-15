@@ -2,8 +2,6 @@ package com.example.dmitryz.todo.presentation.internal.di.modules;
 
 import android.content.Context;
 
-import com.example.dmitryz.todo.data.cache.ToDoCache;
-import com.example.dmitryz.todo.data.cache.ToDoCacheImpl;
 import com.example.dmitryz.todo.data.executor.JobExecutor;
 import com.example.dmitryz.todo.data.repository.ToDoDataRepository;
 import com.example.dmitryz.todo.domain.executor.PostExecutionThread;
@@ -43,12 +41,6 @@ public class ApplicationModule {
     @Singleton
     PostExecutionThread providePostExecutionThread(UIThread uiThread) {
         return uiThread;
-    }
-
-    @Provides
-    @Singleton
-    ToDoCache provideToDoCache(ToDoCacheImpl todoCache) {
-        return todoCache;
     }
 
     @Provides

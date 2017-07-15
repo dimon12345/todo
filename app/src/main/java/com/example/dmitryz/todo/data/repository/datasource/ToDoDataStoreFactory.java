@@ -2,8 +2,6 @@ package com.example.dmitryz.todo.data.repository.datasource;
 
 import android.content.Context;
 
-import com.example.dmitryz.todo.data.cache.ToDoCache;
-
 import javax.inject.Inject;
 
 import io.reactivex.annotations.NonNull;
@@ -15,12 +13,10 @@ import io.reactivex.annotations.NonNull;
 
 public class ToDoDataStoreFactory {
     private final Context context;
-    private final ToDoCache todoCache;
 
     @Inject
-    ToDoDataStoreFactory(@NonNull Context context, @NonNull ToDoCache todoCache) {
+    ToDoDataStoreFactory(@NonNull Context context) {
         this.context = context;
-        this.todoCache = todoCache;
     }
 
     public ToDoDataStore create(String id) {
