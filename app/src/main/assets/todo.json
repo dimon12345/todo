@@ -1,19 +1,19 @@
 {
   "todo":[
     {
-      "id": "12",
-      "title":"reimport from sqlite action",
-      "body":"add action for drop db and reimport data from sqlite"
-    },
-    {
       "id": "13",
       "title":"allow delete items",
       "body":"use can delete item by swipe"
     },
     {
-      "id": "13",
+      "id": "14",
       "title":"cancel delete operation",
       "body":"show notification with \"Undo\" button"
+    },
+    {
+      "id": "15",
+      "title":"add item operation",
+      "body":"allow add todo items"
     }
   ]
 }

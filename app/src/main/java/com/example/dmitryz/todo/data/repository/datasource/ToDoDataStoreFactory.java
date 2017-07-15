@@ -3,10 +3,6 @@ package com.example.dmitryz.todo.data.repository.datasource;
 import android.content.Context;
 
 import com.example.dmitryz.todo.data.cache.ToDoCache;
-import com.example.dmitryz.todo.data.entity.mapper.ToDoEntityJsonMapper;
-import com.example.dmitryz.todo.data.net.RestApi;
-import com.example.dmitryz.todo.data.net.RestApiImpl;
-import com.google.gson.Gson;
 
 import javax.inject.Inject;
 

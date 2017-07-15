@@ -1,6 +1,5 @@
 package com.example.dmitryz.todo.domain.interactor;
 
-import com.example.dmitryz.todo.domain.ToDoItem;
 import com.example.dmitryz.todo.domain.executor.PostExecutionThread;
 import com.example.dmitryz.todo.domain.executor.ThreadExecutor;
 import com.example.dmitryz.todo.domain.repository.ToDoRepository;

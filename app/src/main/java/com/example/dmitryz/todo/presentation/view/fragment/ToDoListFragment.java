@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -188,9 +189,28 @@ public class ToDoListFragment extends BaseFragment implements ToDoListView {
     }
 
     private void setupRecyclerView() {
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder viewHolder1) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                int position = viewHolder.getAdapterPosition();
+                todoListPresenter.removeItem(position);
+                rv_todo.removeViewAt(position);
+                todoAdapter.notifyItemRemoved(position);
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(rv_todo);
+
         todoAdapter.setOnItemClickListener(onItemClickListener);
         rv_todo.setLayoutManager(new ToDoLayoutManager(context()));
         rv_todo.setAdapter(todoAdapter);
+
     }
 
     private void loadToDoList() {

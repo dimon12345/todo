@@ -86,7 +86,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
             throw new IllegalArgumentException("The list cannot be null");
         }
     }
-    static class ToDoViewHolder extends RecyclerView.ViewHolder {
+    public static class ToDoViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tv_title)
         TextView textViewTitle;
 
@@ -95,4 +95,6 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
             ButterKnife.bind(this, itemView);
         }
     }
+
+
 }

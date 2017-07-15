@@ -103,6 +103,10 @@ public class ToDoListPresenter implements Presenter {
         getToDoListUseCase.execute(new ToDoListObserver(), null);
     }
 
+    public void removeItem(int position) {
+
+    }
+
     private final class ToDoListObserver extends DefaultObserver<List<ToDoItem>> {
 
         @Override
