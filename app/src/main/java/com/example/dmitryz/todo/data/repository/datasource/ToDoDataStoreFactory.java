@@ -23,9 +23,5 @@ public class ToDoDataStoreFactory {
         return createRoomDataStore();
     }
 
-    //public ToDoDataStore createSQLiteDataStore() {
-        //return new SQLiteToDoDataStore(context);
-    //}
-
     public ToDoRoomDataStore createRoomDataStore() { return new ToDoRoomDataStore(context); }
 }

@@ -4,6 +4,7 @@ import com.example.dmitryz.todo.domain.ToDoItem;
 import com.example.dmitryz.todo.domain.exception.DefaultErrorBundle;
 import com.example.dmitryz.todo.domain.exception.ErrorBundle;
 import com.example.dmitryz.todo.domain.interactor.DefaultObserver;
+import com.example.dmitryz.todo.domain.interactor.DeleteToDoListItem;
 import com.example.dmitryz.todo.domain.interactor.GetToDoList;
 import com.example.dmitryz.todo.presentation.mapper.ToDoModelDataMapper;
 import com.example.dmitryz.todo.presentation.model.ToDoModel;
@@ -21,15 +22,19 @@ import io.reactivex.annotations.NonNull;
  */
 
 public class ToDoListPresenter implements Presenter {
+
     private ToDoListView todoListView;
 
     private final GetToDoList getToDoListUseCase;
+    private final DeleteToDoListItem deleteToDoListItemUseCase;
     private final ToDoModelDataMapper todoModelDataMapper;
 
     @Inject
     ToDoListPresenter(GetToDoList getToDoListUseCase,
+                      DeleteToDoListItem deleteToDoListItemUseCase,
                       ToDoModelDataMapper todoModelDataMapper) {
         this.getToDoListUseCase = getToDoListUseCase;
+        this.deleteToDoListItemUseCase = deleteToDoListItemUseCase;
         this.todoModelDataMapper = todoModelDataMapper;
     }
 
@@ -104,7 +109,8 @@ public class ToDoListPresenter implements Presenter {
     }
 
     public void removeItem(int position) {
-
+        //ToDoItem item = todoListView.getItem(position);
+        //deleteToDoListItemUseCase.execute(new DeleteToDoListItem.Params(item.getID()));
     }
 
     private final class ToDoListObserver extends DefaultObserver<List<ToDoItem>> {

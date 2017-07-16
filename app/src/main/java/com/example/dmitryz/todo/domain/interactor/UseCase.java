@@ -29,10 +29,8 @@ public abstract class UseCase<T, Params> {
 
     public void execute(DisposableObserver<T> observer, Params params) {
         final Observable<T> observable = this.buildUseCaseObservable(params)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-//                .subscribeOn(Schedulers.from(threadExecutor))
-//                .observeOn(postExecutionThread.getScheduler());
+                .subscribeOn(Schedulers.from(threadExecutor))
+                .observeOn(postExecutionThread.getScheduler());
 
         addDisposable(observable.subscribeWith(observer));
     }

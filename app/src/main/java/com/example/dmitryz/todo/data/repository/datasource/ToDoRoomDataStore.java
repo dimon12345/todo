@@ -35,6 +35,7 @@ public class ToDoRoomDataStore implements ToDoDataStore {
         //db = Room.databaseBuilder(context, ApplicationDatabase.class, "tododb").allowMainThreadQueries().build();
         db = Room.databaseBuilder(context, ApplicationDatabase.class, "tododb").build();
     }
+
     @Override
     public Observable<List<ToDoEntity>> todoEntityList() {
         return Observable.defer(new Callable<ObservableSource<List<ToDoRoomEntity>>>() {
@@ -56,7 +57,6 @@ public class ToDoRoomDataStore implements ToDoDataStore {
 
     @Override
     public Observable<ToDoEntity> todoEntityDetails(String id) {
-
         return Observable.just(db.toDoEntityDao().loadById(Integer.parseInt(id)))
                 .map(new Function<ToDoRoomEntity, ToDoEntity>() {
                     @Override
@@ -73,6 +73,18 @@ public class ToDoRoomDataStore implements ToDoDataStore {
     }
 
     @Override
+    public Observable<Void> deleteById(final String id) {
+
+        return Observable.defer(new Callable<ObservableSource<Void>>() {
+            @Override
+            public ObservableSource<Void> call() throws Exception {
+                db.toDoEntityDao().deleteById(Integer.parseInt(id));
+                return Observable.empty();
+            }
+        });
+    }
+
+    @Override
     public Observable<Void> reset() {
         return Observable.defer(new Callable<ObservableSource<Void>>() {
             @Override
@@ -85,13 +97,12 @@ public class ToDoRoomDataStore implements ToDoDataStore {
     }
 
     private List<ToDoEntity> getData() {
-        //InputStream stream = null;
-        ArrayList<ToDoEntity> list = new ArrayList<ToDoEntity>();
         final String json = AssetLoader.loadJSONFromAsset(context, "todo.json");
         Gson gson = new Gson();
         ToDoEntityList todoEntityList = gson.fromJson(json, ToDoEntityList.class);
         return todoEntityList.getToDoEntities();
     }
+
     private void fillData(){
         List<ToDoEntity> data = getData();
 

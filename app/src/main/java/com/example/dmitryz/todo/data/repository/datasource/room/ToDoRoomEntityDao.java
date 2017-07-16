@@ -23,8 +23,8 @@ public interface ToDoRoomEntityDao {
     @Insert
     void insert(ToDoRoomEntity entity);
 
-    @Delete
-    void delete(ToDoRoomEntity entity);
+    @Query("DELETE FROM todo WHERE id = :id")
+    void deleteById(int id);
 
     @Query("DELETE FROM todo")
     void dropTable();
