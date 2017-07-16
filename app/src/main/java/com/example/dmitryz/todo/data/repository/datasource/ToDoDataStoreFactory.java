@@ -20,10 +20,12 @@ public class ToDoDataStoreFactory {
     }
 
     public ToDoDataStore create(String id) {
-        return createSQLiteDataStore();
+        return createRoomDataStore();
     }
 
-    public ToDoDataStore createSQLiteDataStore() {
-        return new SQLiteToDoDataStore(context);
-    }
+    //public ToDoDataStore createSQLiteDataStore() {
+        //return new SQLiteToDoDataStore(context);
+    //}
+
+    public ToDoRoomDataStore createRoomDataStore() { return new ToDoRoomDataStore(context); }
 }

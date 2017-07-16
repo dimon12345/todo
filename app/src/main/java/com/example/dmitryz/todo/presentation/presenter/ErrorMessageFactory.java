@@ -25,6 +25,8 @@ class ErrorMessageFactory {
         } else if (exception instanceof JsonSyntaxException) {
             JsonSyntaxException e = (JsonSyntaxException)exception;
             message = "Json exception: " + e.getMessage();
+        } else {
+            message = message + " " + exception.getMessage();
         }
 
         return message;

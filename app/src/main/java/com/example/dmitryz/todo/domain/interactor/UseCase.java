@@ -4,6 +4,7 @@ import com.example.dmitryz.todo.domain.executor.PostExecutionThread;
 import com.example.dmitryz.todo.domain.executor.ThreadExecutor;
 
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
@@ -28,8 +29,10 @@ public abstract class UseCase<T, Params> {
 
     public void execute(DisposableObserver<T> observer, Params params) {
         final Observable<T> observable = this.buildUseCaseObservable(params)
-                .subscribeOn(Schedulers.from(threadExecutor))
-                .observeOn(postExecutionThread.getScheduler());
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+//                .subscribeOn(Schedulers.from(threadExecutor))
+//                .observeOn(postExecutionThread.getScheduler());
 
         addDisposable(observable.subscribeWith(observer));
     }

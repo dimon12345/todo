@@ -69,6 +69,6 @@ public class ToDoDataRepository implements ToDoRepository {
     }
 
     ToDoDataStore getToDoDataStore() {
-        return this.toDoDataStoreFactory.createSQLiteDataStore();
+        return this.toDoDataStoreFactory.createRoomDataStore();
     }
 }

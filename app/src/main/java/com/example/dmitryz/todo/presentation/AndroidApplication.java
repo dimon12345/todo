@@ -35,6 +35,7 @@ public class AndroidApplication extends Application {
             LeakCanary.install(this);
         }
     }
+
     public ApplicationComponent getApplicationComponent() {
         return this.applicationComponent;
     }
