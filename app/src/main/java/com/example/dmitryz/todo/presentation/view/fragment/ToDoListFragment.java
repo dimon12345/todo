@@ -14,7 +14,6 @@ import android.widget.RelativeLayout;
 import com.example.dmitryz.todo.R;
 import com.example.dmitryz.todo.presentation.internal.di.components.ToDoComponent;
 import com.example.dmitryz.todo.presentation.model.ToDoModel;
-import com.example.dmitryz.todo.presentation.presenter.FloatingActionPresenter;
 import com.example.dmitryz.todo.presentation.presenter.ToDoListPresenter;
 import com.example.dmitryz.todo.presentation.view.ToDoListView;
 import com.example.dmitryz.todo.presentation.view.adapter.ToDoAdapter;

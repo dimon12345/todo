@@ -6,11 +6,6 @@
       "body":"allow add todo items"
     },
     {
-      "id": "15",
-      "title":"remove swipe",
-      "body":"replace \"swipe to delete\" by hold to context menu"
-    },
-    {
       "id": "16",
       "title":"cancel delete operation",
       "body":"show notification with \"Undo\" button"
