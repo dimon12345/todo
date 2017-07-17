@@ -68,6 +68,11 @@ public class ToDoDataRepository implements ToDoRepository {
         return getToDoDataStore().reset();
     }
 
+    @Override
+    public Observable<Void> deleteById(String id) {
+        return getToDoDataStore().deleteById(id);
+    }
+
     ToDoDataStore getToDoDataStore() {
         return this.toDoDataStoreFactory.createRoomDataStore();
     }

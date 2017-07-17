@@ -199,7 +199,8 @@ public class ToDoListFragment extends BaseFragment implements ToDoListView {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 int position = viewHolder.getAdapterPosition();
-                todoListPresenter.removeItem(position);
+                long id = todoAdapter.getItemId(position);
+                todoListPresenter.removeItem(id);
 
 //                rv_todo.removeViewAt(position);
   //              todoAdapter.notifyItemRemoved(position);

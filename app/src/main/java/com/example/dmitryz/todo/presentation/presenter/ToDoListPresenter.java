@@ -28,6 +28,7 @@ public class ToDoListPresenter implements Presenter {
     private final GetToDoList getToDoListUseCase;
     private final DeleteToDoListItem deleteToDoListItemUseCase;
     private final ToDoModelDataMapper todoModelDataMapper;
+    private Collection<ToDoItem> cachedList;
 
     @Inject
     ToDoListPresenter(GetToDoList getToDoListUseCase,
@@ -102,15 +103,15 @@ public class ToDoListPresenter implements Presenter {
         final Collection<ToDoModel> todoModelsCollection =
                 todoModelDataMapper.transform(todoItemsCollection);
         todoListView.renderToDoList(todoModelsCollection);
+        cachedList = todoItemsCollection;
     }
 
     private void getToDoList() {
         getToDoListUseCase.execute(new ToDoListObserver(), null);
     }
 
-    public void removeItem(int position) {
-        //ToDoItem item = todoListView.getItem(position);
-        //deleteToDoListItemUseCase.execute(new DeleteToDoListItem.Params(item.getID()));
+    public void removeItem(long id) {
+        deleteToDoListItemUseCase.execute(this, new DeleteToDoListItem.Params(id));
     }
 
     private final class ToDoListObserver extends DefaultObserver<List<ToDoItem>> {

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.dmitryz.todo.R;
+import com.example.dmitryz.todo.data.entity.ToDoEntity;
 import com.example.dmitryz.todo.presentation.model.ToDoModel;
 
 import java.util.Collection;
@@ -66,9 +67,12 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
         });
     }
 
+    private ToDoModel getItem(int position) {
+        return todoItemsCollection.get(position);
+    }
     @Override
     public long getItemId(int position) {
-        return position;
+        return Long.parseLong(getItem(position).getId());
     }
 
     public void setTodoItemsCollection(Collection<ToDoModel> todoItemsCollection) {

@@ -19,4 +19,6 @@ public interface ToDoRepository {
     Observable<Void> addToDoItem(ToDoItem toDoItem);
 
     Observable<Void> reset();
+
+    Observable<Void> deleteById(String id);
 }
