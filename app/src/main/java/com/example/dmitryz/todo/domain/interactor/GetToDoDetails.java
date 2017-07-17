@@ -28,12 +28,12 @@ public class GetToDoDetails extends UseCase<ToDoItem, GetToDoDetails.Params> {
     }
 
     public static final class Params {
-        private Params(String id) {
+        private Params(long id) {
             this.id = id;
         }
-        private String id;
+        private long id;
 
-        public static Params forToDoId(String id) {
+        public static Params forToDoId(long id) {
             return new Params(id);
         }
     }

@@ -6,10 +6,12 @@ import com.example.dmitryz.todo.domain.exception.ErrorBundle;
 import com.example.dmitryz.todo.domain.interactor.DefaultObserver;
 import com.example.dmitryz.todo.domain.interactor.DeleteToDoListItem;
 import com.example.dmitryz.todo.domain.interactor.GetToDoList;
+import com.example.dmitryz.todo.domain.interactor.ResetToDoList;
 import com.example.dmitryz.todo.presentation.mapper.ToDoModelDataMapper;
 import com.example.dmitryz.todo.presentation.model.ToDoModel;
 import com.example.dmitryz.todo.presentation.view.ToDoListView;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -26,16 +28,19 @@ public class ToDoListPresenter implements Presenter {
     private ToDoListView todoListView;
 
     private final GetToDoList getToDoListUseCase;
+    private final ResetToDoList resetToDoListUseCase;
     private final DeleteToDoListItem deleteToDoListItemUseCase;
     private final ToDoModelDataMapper todoModelDataMapper;
-    private Collection<ToDoItem> cachedList;
+    private List<ToDoModel> cachedList = new ArrayList<>();
 
     @Inject
     ToDoListPresenter(GetToDoList getToDoListUseCase,
                       DeleteToDoListItem deleteToDoListItemUseCase,
+                      ResetToDoList resetToDoListUseCase,
                       ToDoModelDataMapper todoModelDataMapper) {
         this.getToDoListUseCase = getToDoListUseCase;
         this.deleteToDoListItemUseCase = deleteToDoListItemUseCase;
+        this.resetToDoListUseCase = resetToDoListUseCase;
         this.todoModelDataMapper = todoModelDataMapper;
     }
 
@@ -56,6 +61,7 @@ public class ToDoListPresenter implements Presenter {
     @Override
     public void destroy() {
         getToDoListUseCase.dispose();
+        deleteToDoListItemUseCase.dispose();
         todoListView = null;
     }
 
@@ -99,22 +105,45 @@ public class ToDoListPresenter implements Presenter {
         todoListView.showError(errorMessage);
     }
 
-    private void showToDoCollectionInView(Collection<ToDoItem> todoItemsCollection) {
-        final Collection<ToDoModel> todoModelsCollection =
+    private void showToDoCollectionInView(List<ToDoItem> todoItemsCollection) {
+        final List<ToDoModel> todoModelsCollection =
                 todoModelDataMapper.transform(todoItemsCollection);
         todoListView.renderToDoList(todoModelsCollection);
-        cachedList = todoItemsCollection;
+        cachedList = todoModelsCollection;
     }
 
     private void getToDoList() {
-        getToDoListUseCase.execute(new ToDoListObserver(), null);
+        getToDoListUseCase.execute(new ToDoListLoadingObserver(), null);
     }
 
-    public void removeItem(long id) {
-        deleteToDoListItemUseCase.execute(this, new DeleteToDoListItem.Params(id));
+    public void removeItem(int index) {
+        todoListView.removeItem(index);
+        ToDoModel toDoModel = cachedList.get(index);
+        deleteToDoListItemUseCase.execute(new ToDoListLoadingObserver(), new DeleteToDoListItem.Params(toDoModel.getId()));
     }
 
-    private final class ToDoListObserver extends DefaultObserver<List<ToDoItem>> {
+    public void reset() {
+        resetToDoListUseCase.execute(new ResetToDoListObserver(), null);
+
+    }
+
+    private class ResetToDoListObserver extends io.reactivex.observers.DisposableObserver<List<ToDoItem>> {
+        @Override
+        public void onNext(List<ToDoItem> items) {
+            showToDoCollectionInView(items);
+        }
+
+        @Override
+        public void onError(Throwable e) {
+
+        }
+
+        @Override
+        public void onComplete() {
+        }
+    }
+
+    private final class ToDoListLoadingObserver extends DefaultObserver<List<ToDoItem>> {
 
         @Override
         public void onComplete() {

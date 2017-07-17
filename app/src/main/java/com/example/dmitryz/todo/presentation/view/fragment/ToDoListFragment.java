@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,7 @@ import com.example.dmitryz.todo.presentation.view.adapter.ToDoAdapter;
 import com.example.dmitryz.todo.presentation.view.adapter.ToDoLayoutManager;
 import com.github.clans.fab.FloatingActionMenu;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -44,8 +43,8 @@ public class ToDoListFragment extends BaseFragment implements ToDoListView {
     @Inject
     ToDoListPresenter todoListPresenter;
 
-    @Inject
-    FloatingActionPresenter floatingActionPresenter;
+    //@Inject
+    //FloatingActionPresenter floatingActionPresenter;
 
     private Unbinder unbinder;
 
@@ -107,6 +106,8 @@ public class ToDoListFragment extends BaseFragment implements ToDoListView {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         todoListPresenter.setView(this);
+        //floatingActionPresenter.bindView(this);
+
         if (savedInstanceState == null) {
             loadToDoList();
         }
@@ -130,10 +131,12 @@ public class ToDoListFragment extends BaseFragment implements ToDoListView {
         rv_todo.setAdapter(null);
         unbinder.unbind();
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         todoListPresenter.destroy();
+        //floatingActionPresenter.destroy();
     }
 
     @Override
@@ -165,9 +168,9 @@ public class ToDoListFragment extends BaseFragment implements ToDoListView {
     }
 
     @Override
-    public void renderToDoList(Collection<ToDoModel> todoModelCollection) {
-        if (todoModelCollection != null) {
-            todoAdapter.setTodoItemsCollection(todoModelCollection);
+    public void renderToDoList(List<ToDoModel> todoModelList) {
+        if (todoModelList != null) {
+            todoAdapter.setTodoItemsList(todoModelList);
         }
     }
 
@@ -176,6 +179,12 @@ public class ToDoListFragment extends BaseFragment implements ToDoListView {
         if (todoListListener != null) {
             todoListListener.onToDoClicked(todoModel);
         }
+    }
+
+    @Override
+    public void removeItem(int position) {
+        rv_todo.removeViewAt(position);
+        todoAdapter.notifyItemRemoved(position);
     }
 
     @Override
@@ -199,8 +208,7 @@ public class ToDoListFragment extends BaseFragment implements ToDoListView {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 int position = viewHolder.getAdapterPosition();
-                long id = todoAdapter.getItemId(position);
-                todoListPresenter.removeItem(id);
+                todoListPresenter.removeItem(position);
 
 //                rv_todo.removeViewAt(position);
   //              todoAdapter.notifyItemRemoved(position);
@@ -242,7 +250,7 @@ public class ToDoListFragment extends BaseFragment implements ToDoListView {
 
     @OnClick(R.id.reload_from_json)
     void reloadFromJson() {
-        floatingActionPresenter.reset();
+        todoListPresenter.reset();
         closeFloatingActionMenu(false);
     }
 

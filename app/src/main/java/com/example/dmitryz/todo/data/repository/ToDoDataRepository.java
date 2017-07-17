@@ -48,7 +48,7 @@ public class ToDoDataRepository implements ToDoRepository {
     }
 
     @Override
-    public Observable<ToDoItem> getElement(String id) {
+    public Observable<ToDoItem> getElement(long id) {
         return getToDoDataStore().todoEntityDetails(id).map(new Function<ToDoEntity, ToDoItem>() {
             @Override
             public ToDoItem apply(ToDoEntity todoEntity) throws Exception {
@@ -64,12 +64,12 @@ public class ToDoDataRepository implements ToDoRepository {
     }
 
     @Override
-    public Observable<Void> reset() {
+    public Observable<Boolean> reset() {
         return getToDoDataStore().reset();
     }
 
     @Override
-    public Observable<Void> deleteById(String id) {
+    public Observable<Boolean> deleteById(long id) {
         return getToDoDataStore().deleteById(id);
     }
 

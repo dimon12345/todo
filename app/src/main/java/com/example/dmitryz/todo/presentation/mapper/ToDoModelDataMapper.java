@@ -6,6 +6,7 @@ import com.example.dmitryz.todo.presentation.model.ToDoModel;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -23,24 +24,26 @@ public class ToDoModelDataMapper {
             throw new IllegalArgumentException("Cannot transform a null value");
         }
 
-        final ToDoModel todoModel = new ToDoModel(todoItem.getID());
+        long id = Long.parseLong(todoItem.getID());
+        final ToDoModel todoModel = new ToDoModel(id);
+
         todoModel.setTitle(todoItem.getTitle());
         todoModel.setBody(todoItem.getBody());
         return todoModel;
     }
 
-    public Collection<ToDoModel> transform(Collection<ToDoItem> todoCollection) {
-        Collection<ToDoModel> todoModelsCollection;
+    public List<ToDoModel> transform(List<ToDoItem> todoItemsList) {
+        List<ToDoModel> todoModelsList;
 
-        if (todoCollection != null && !todoCollection.isEmpty()) {
-            todoModelsCollection = new ArrayList<>();
-            for (ToDoItem todoItem : todoCollection) {
-                todoModelsCollection.add(transform(todoItem));
+        if (todoItemsList != null && !todoItemsList.isEmpty()) {
+            todoModelsList = new ArrayList<>();
+            for (ToDoItem todoItem : todoItemsList) {
+                todoModelsList.add(transform(todoItem));
             }
         } else {
-            todoModelsCollection = Collections.emptyList();
+            todoModelsList = new ArrayList<>();
         }
-        return todoModelsCollection;
+        return todoModelsList;
     }
 
 }

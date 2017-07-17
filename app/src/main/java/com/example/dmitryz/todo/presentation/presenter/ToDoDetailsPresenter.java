@@ -23,7 +23,7 @@ public class ToDoDetailsPresenter implements Presenter {
 
     private final GetToDoDetails getToDoDetailsUseCase;
     private final ToDoModelDataMapper todoModelDataMapper;
-    private String todoId;
+    private long todoId;
 
     @Inject
     public ToDoDetailsPresenter(GetToDoDetails getToDoDetailsUseCase,
@@ -52,18 +52,18 @@ public class ToDoDetailsPresenter implements Presenter {
         todoDetailsView = null;
     }
 
-    public void initialize(String todoId) {
+    public void initialize(long todoId) {
         loadToDoDetails(todoId);
     }
 
-    private void loadToDoDetails(String todoId) {
+    private void loadToDoDetails(long todoId) {
         hideViewRetry();
         showViewLoading();
         this.todoId = todoId;
         getToDoDetails(todoId);
     }
 
-    private void getToDoDetails(String todoId) {
+    private void getToDoDetails(long todoId) {
         getToDoDetailsUseCase.execute(new ToDoDetailsObserver(), GetToDoDetails.Params.forToDoId(todoId));
     }
 
@@ -95,7 +95,7 @@ public class ToDoDetailsPresenter implements Presenter {
     }
 
     public void retry() {
-        if(todoId == null) {
+        if(todoId < 0) {
             return;
         }
         loadToDoDetails(todoId);

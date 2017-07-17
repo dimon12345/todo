@@ -10,7 +10,7 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity(tableName = "todo")
 public class ToDoRoomEntity {
     @PrimaryKey
-    public int id;
+    public long id;
 
     public String title;
     public String body;

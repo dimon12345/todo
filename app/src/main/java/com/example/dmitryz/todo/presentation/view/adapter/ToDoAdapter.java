@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.dmitryz.todo.R;
-import com.example.dmitryz.todo.data.entity.ToDoEntity;
 import com.example.dmitryz.todo.presentation.model.ToDoModel;
 
 import java.util.Collection;
@@ -30,7 +29,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
         void onToDoItemClicked(ToDoModel todoModel);
     }
 
-    private List<ToDoModel> todoItemsCollection;
+    private List<ToDoModel> todoItemsList;
     private final LayoutInflater layoutInflater;
 
     private OnItemClickListener onItemClickListener;
@@ -38,12 +37,12 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
     @Inject
     ToDoAdapter(Context context) {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        todoItemsCollection = Collections.emptyList();
+        todoItemsList = Collections.emptyList();
     }
 
     @Override
     public int getItemCount() {
-        return (todoItemsCollection != null) ? todoItemsCollection.size() : 0;
+        return (todoItemsList != null) ? todoItemsList.size() : 0;
     }
 
     @Override
@@ -54,7 +53,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
 
     @Override
     public void onBindViewHolder(ToDoViewHolder holder, final int position) {
-        final ToDoModel todoModel = this.todoItemsCollection.get(position);
+        final ToDoModel todoModel = this.todoItemsList.get(position);
         holder.textViewTitle.setText(todoModel.getTitle());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
 
@@ -68,16 +67,16 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
     }
 
     private ToDoModel getItem(int position) {
-        return todoItemsCollection.get(position);
+        return todoItemsList.get(position);
     }
     @Override
     public long getItemId(int position) {
-        return Long.parseLong(getItem(position).getId());
+        return getItem(position).getId();
     }
 
-    public void setTodoItemsCollection(Collection<ToDoModel> todoItemsCollection) {
-        validateToDoCollection(todoItemsCollection);
-        this.todoItemsCollection = (List<ToDoModel>) todoItemsCollection;
+    public void setTodoItemsList(List<ToDoModel> todoItemsCollection) {
+        validateToDoList(todoItemsCollection);
+        this.todoItemsList = todoItemsCollection;
         notifyDataSetChanged();
     }
 
@@ -85,7 +84,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
         this.onItemClickListener = onItemClickListener;
     }
 
-    private void validateToDoCollection(Collection<ToDoModel> todoCollection) {
+    private void validateToDoList(Collection<ToDoModel> todoCollection) {
         if (todoCollection == null) {
             throw new IllegalArgumentException("The list cannot be null");
         }

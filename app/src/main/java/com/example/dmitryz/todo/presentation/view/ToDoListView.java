@@ -3,6 +3,7 @@ package com.example.dmitryz.todo.presentation.view;
 import com.example.dmitryz.todo.presentation.model.ToDoModel;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by q on 05.06.17.
@@ -10,7 +11,9 @@ import java.util.Collection;
 
 public interface ToDoListView extends LoadDataView {
 
-    void renderToDoList(Collection<ToDoModel> toDoModelCollection);
+    void renderToDoList(List<ToDoModel> toDoModelCollection);
 
     void viewToDo(ToDoModel todoModel);
+
+    void removeItem(int position);
 }

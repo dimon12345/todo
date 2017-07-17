@@ -6,16 +6,16 @@ package com.example.dmitryz.todo.presentation.model;
 
 public class ToDoModel {
 
-    private final String id;
+    private final long id;
 
-    public ToDoModel(String id) {
+    public ToDoModel(long id) {
         this.id = id;
     }
 
     private String title;
     private String body;
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 

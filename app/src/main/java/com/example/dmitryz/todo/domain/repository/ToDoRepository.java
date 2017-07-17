@@ -14,11 +14,11 @@ import io.reactivex.Single;
 public interface ToDoRepository {
     Observable<List<ToDoItem>> getElements();
 
-    Observable<ToDoItem> getElement(String id);
+    Observable<ToDoItem> getElement(long id);
 
     Observable<Void> addToDoItem(ToDoItem toDoItem);
 
-    Observable<Void> reset();
+    Observable<Boolean> reset();
 
-    Observable<Void> deleteById(String id);
+    Observable<Boolean> deleteById(long id);
 }

@@ -18,7 +18,7 @@ public class Navigator {
     public Navigator() {
     }
 
-    public void navigateToToDoDetails(Context context, String id) {
+    public void navigateToToDoDetails(Context context, long id) {
         if (context != null) {
             Intent intentToLaunch = ToDoDetailsActivity.getCallingIntent(context, id);
             context.startActivity(intentToLaunch);

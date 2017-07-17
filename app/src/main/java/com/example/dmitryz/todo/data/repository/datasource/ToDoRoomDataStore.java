@@ -56,14 +56,20 @@ public class ToDoRoomDataStore implements ToDoDataStore {
     }
 
     @Override
-    public Observable<ToDoEntity> todoEntityDetails(String id) {
-        return Observable.just(db.toDoEntityDao().loadById(Integer.parseInt(id)))
-                .map(new Function<ToDoRoomEntity, ToDoEntity>() {
-                    @Override
-                    public ToDoEntity apply(ToDoRoomEntity toDoRoomEntity) throws Exception {
-                        return toDoRoomEntityMapper.convert(toDoRoomEntity);
-                    }
-                });
+    public Observable<ToDoEntity> todoEntityDetails(final long id) {
+
+        return Observable.defer(new Callable<ObservableSource<ToDoEntity>>() {
+            @Override
+            public ObservableSource<ToDoEntity> call() throws Exception {
+                return Observable.just(db.toDoEntityDao().loadById(id))
+                        .map(new Function<ToDoRoomEntity, ToDoEntity>() {
+                            @Override
+                            public ToDoEntity apply(ToDoRoomEntity toDoRoomEntity) throws Exception {
+                                return toDoRoomEntityMapper.convert(toDoRoomEntity);
+                            }
+                        });
+            }
+        });
     }
 
     @Override
@@ -79,25 +85,25 @@ public class ToDoRoomDataStore implements ToDoDataStore {
     }
 
     @Override
-    public Observable<Void> deleteById(final String id) {
+    public Observable<Boolean> deleteById(final long id) {
 
-        return Observable.defer(new Callable<ObservableSource<Void>>() {
+        return Observable.defer(new Callable<Observable<Boolean>>() {
             @Override
-            public ObservableSource<Void> call() throws Exception {
-                db.toDoEntityDao().deleteById(Integer.parseInt(id));
-                return Observable.empty();
+            public Observable<Boolean> call() throws Exception {
+                db.toDoEntityDao().deleteById(id);
+                return Observable.just(true);
             }
         });
     }
 
     @Override
-    public Observable<Void> reset() {
-        return Observable.defer(new Callable<ObservableSource<Void>>() {
+    public Observable<Boolean> reset() {
+        return Observable.defer(new Callable<ObservableSource<Boolean>>() {
             @Override
-            public ObservableSource<Void> call() throws Exception {
+            public ObservableSource<Boolean> call() throws Exception {
                 db.toDoEntityDao().dropTable();
                 fillData();
-                return Observable.empty();
+                return Observable.just(true);
             }
         });
     }

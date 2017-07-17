@@ -17,13 +17,13 @@ public interface ToDoRoomEntityDao {
 
 
     @Query("SELECT * FROM todo WHERE id = :id")
-    ToDoRoomEntity loadById(int id);
+    ToDoRoomEntity loadById(long id);
 
     @Insert
     void insert(ToDoRoomEntity entity);
 
     @Query("DELETE FROM todo WHERE id = :id")
-    void deleteById(int id);
+    void deleteById(long id);
 
     @Query("DELETE FROM todo")
     void dropTable();

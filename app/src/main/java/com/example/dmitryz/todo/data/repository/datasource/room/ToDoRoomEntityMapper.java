@@ -14,7 +14,7 @@ public class ToDoRoomEntityMapper {
     public ToDoEntity convert(ToDoRoomEntity roomEntity) {
         ToDoEntity result = new ToDoEntity();
 
-        result.setID(Integer.toString(roomEntity.id));
+        result.setID(Long.toString(roomEntity.id));
         result.setTitle(roomEntity.title);
         result.setBody(roomEntity.body);
 

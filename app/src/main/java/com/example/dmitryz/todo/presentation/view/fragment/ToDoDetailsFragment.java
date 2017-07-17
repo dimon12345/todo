@@ -49,10 +49,10 @@ public class ToDoDetailsFragment extends BaseFragment implements ToDoDetailsView
     @BindView(R.id.tv_body)
     TextView tv_body;
 
-    public static ToDoDetailsFragment forToDo(String todoId) {
+    public static ToDoDetailsFragment forToDo(long todoId) {
         final ToDoDetailsFragment todoDetailsFragment = new ToDoDetailsFragment();
         final Bundle arguments = new Bundle();
-        arguments.putString(PARAM_TODO_ID, todoId);
+        arguments.putLong(PARAM_TODO_ID, todoId);
         todoDetailsFragment.setArguments(arguments);
         return todoDetailsFragment;
     }
@@ -153,9 +153,9 @@ public class ToDoDetailsFragment extends BaseFragment implements ToDoDetailsView
         }
     }
 
-    private String currentToDoId() {
+    private long currentToDoId() {
         final Bundle arguments = getArguments();
-        return arguments.getString(PARAM_TODO_ID);
+        return arguments.getLong(PARAM_TODO_ID);
     }
 
     @OnClick(R.id.bt_retry)
