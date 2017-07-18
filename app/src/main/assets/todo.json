@@ -2,23 +2,23 @@
   "todo":[
     {
       "id": "1",
-      "title":"Swipe this list item to right",
-      "body":"delete this item"
+      "title":"item context menu",
+      "body":"show \"delete\" button on hold list item"
     },
     {
       "id": "2",
-      "title":"Swipe this list item to left",
-      "body":"delete this item"
+      "title":"delete item from context menu",
+      "body":"delete item with context menu"
     },
     {
       "id": "3",
-      "title":"Tap me",
-      "body":"here more detailed info for taped item"
+      "title":"add sets view",
+      "body":"add activity to set manage with context submenu"
     },
     {
       "id": "4",
-      "title":"Red \"plus\" button",
-      "body":"Use red \"plus\" button to access other options"
+      "title":"add floating action button to sets",
+      "body":"add \"reload from json\" and \"new set\" actions"
     }
   ]
 }
