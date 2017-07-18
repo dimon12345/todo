@@ -73,13 +73,14 @@ public class ToDoRoomDataStore implements ToDoDataStore {
     }
 
     @Override
-    public Observable<Void> addEntity(ToDoEntity entity) {
+    public Observable<Boolean> addEntity(ToDoEntity entity) {
         final ToDoEntity finalEntity = entity;
-        return Observable.defer(new Callable<ObservableSource<Void>>() {
+        return Observable.defer(new Callable<ObservableSource<Boolean>>() {
             @Override
-            public ObservableSource<Void> call() throws Exception {
-                db.toDoEntityDao().insert(toDoRoomEntityMapper.convert(finalEntity));
-                return Observable.empty();
+            public ObservableSource<Boolean> call() throws Exception {
+                ToDoRoomEntity roomEntity = toDoRoomEntityMapper.convert(finalEntity);
+                db.toDoEntityDao().insert(roomEntity);
+                return Observable.just(true);
             }
         });
     }

@@ -16,7 +16,7 @@ import io.reactivex.ObservableSource;
  * Created by dmitryz on 6/26/17.
  */
 
-public class AddToDoItem extends UseCase<Void, ToDoItem> {
+public class AddToDoItem extends UseCase<Boolean, ToDoItem> {
     private final ToDoRepository itemsRepository;
 
 
@@ -27,11 +27,11 @@ public class AddToDoItem extends UseCase<Void, ToDoItem> {
     }
 
     @Override
-    Observable<Void> buildUseCaseObservable(ToDoItem toDoItem) {
+    Observable<Boolean> buildUseCaseObservable(ToDoItem toDoItem) {
         final ToDoItem localToDoItem = toDoItem;
-        return Observable.defer(new Callable<ObservableSource<Void>>() {
+        return Observable.defer(new Callable<Observable<Boolean>>() {
             @Override
-            public ObservableSource<Void> call() throws Exception {
+            public Observable<Boolean> call() throws Exception {
                 return itemsRepository.addToDoItem(localToDoItem);
             }
         });

@@ -1,5 +1,7 @@
 package com.example.dmitryz.todo.data.repository.datasource.room;
 
+import android.text.TextUtils;
+
 import com.example.dmitryz.todo.data.entity.ToDoEntity;
 
 import java.util.List;
@@ -23,7 +25,14 @@ public class ToDoRoomEntityMapper {
 
     public ToDoRoomEntity convert(ToDoEntity entity) {
         ToDoRoomEntity result = new ToDoRoomEntity();
-        result.id = Integer.parseInt(entity.getID());
+        if (!TextUtils.isEmpty(entity.getID())) {
+            result.id = Integer.parseInt(entity.getID());
+        } else {
+            // Room field with autoGenerate
+            // insert methods treat 0 as not-set while inserting the item.
+            result.id = 0;
+        }
+
         result.title = entity.getTitle();
         result.body = entity.getBody();
         return result;

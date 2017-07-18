@@ -50,7 +50,7 @@ public class ToDoListPresenter implements Presenter {
 
     @Override
     public void resume() {
-
+        getToDoList();
     }
 
     @Override

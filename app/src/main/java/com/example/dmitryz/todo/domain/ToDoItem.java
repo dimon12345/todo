@@ -1,5 +1,7 @@
 package com.example.dmitryz.todo.domain;
 
+import android.support.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +12,7 @@ import java.util.List;
 public class ToDoItem {
     String id;
 
-    public ToDoItem(String id) {
+    public ToDoItem(@Nullable String id) {
         this.id = id;
     }
 

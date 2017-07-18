@@ -9,7 +9,7 @@ import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName = "todo")
 public class ToDoRoomEntity {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public long id;
 
     public String title;

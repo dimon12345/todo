@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.example.dmitryz.todo.R;
 import com.example.dmitryz.todo.presentation.internal.di.components.ToDoComponent;
@@ -12,7 +13,9 @@ import com.example.dmitryz.todo.presentation.view.AddToDoItemView;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -20,6 +23,12 @@ import butterknife.Unbinder;
  */
 
 public class AddToDoItemFragment  extends BaseFragment implements AddToDoItemView {
+
+    @BindView(R.id.title)
+    EditText titleTextView;
+
+    @BindView(R.id.body)
+    EditText bodyTextView;
 
     @Inject
     AddToDoItemPresenter addToDoPresenter;
@@ -51,4 +60,13 @@ public class AddToDoItemFragment  extends BaseFragment implements AddToDoItemVie
         unbinder.unbind();
     }
 
+    @OnClick(R.id.add_button)
+    public void onAddButtonClick() {
+        addToDoPresenter.addToDoItem(titleTextView.getText().toString(), bodyTextView.getText().toString());
+    }
+
+    @Override
+    public void done() {
+        getActivity().finish();
+    }
 }

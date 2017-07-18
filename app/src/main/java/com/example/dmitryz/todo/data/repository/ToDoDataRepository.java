@@ -58,7 +58,7 @@ public class ToDoDataRepository implements ToDoRepository {
     }
 
     @Override
-    public Observable<Void> addToDoItem(ToDoItem toDoItem) {
+    public Observable<Boolean> addToDoItem(ToDoItem toDoItem) {
         ToDoEntity toDoEntity = toDoItemDataMapper.transform(toDoItem);
         return getToDoDataStore().addEntity(toDoEntity);
     }

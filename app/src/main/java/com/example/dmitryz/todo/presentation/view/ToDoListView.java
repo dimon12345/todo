@@ -16,4 +16,6 @@ public interface ToDoListView extends LoadDataView {
     void viewToDo(ToDoModel todoModel);
 
     void removeItem(int position);
+
+    void updateItems();
 }

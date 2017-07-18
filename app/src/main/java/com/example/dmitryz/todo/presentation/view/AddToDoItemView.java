@@ -6,4 +6,5 @@ package com.example.dmitryz.todo.presentation.view;
 
 public interface AddToDoItemView {
 
+    void done();
 }

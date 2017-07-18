@@ -13,7 +13,7 @@ import io.reactivex.Observable;
 public interface ToDoDataStore {
     Observable<List<ToDoEntity>> todoEntityList();
     Observable<ToDoEntity> todoEntityDetails(final long id);
-    Observable<Void> addEntity(ToDoEntity entity);
+    Observable<Boolean> addEntity(ToDoEntity entity);
     Observable<Boolean> deleteById(final long id);
     Observable<Boolean> reset();
 }

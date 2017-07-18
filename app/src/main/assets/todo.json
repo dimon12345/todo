@@ -1,14 +1,19 @@
 {
   "todo":[
     {
-      "id": "14",
-      "title":"add item operation",
-      "body":"allow add todo items"
+      "id": "1",
+      "title":"Swipe this list item to right",
+      "body":"delete this item"
     },
     {
-      "id": "16",
-      "title":"cancel delete operation",
-      "body":"show notification with \"Undo\" button"
+      "id": "2",
+      "title":"Swipe this list item to left",
+      "body":"delete this item"
+    },
+    {
+      "id": "3",
+      "title":"Red \"plus\" button",
+      "body":"Use red \"plus\" button to access other options"
     }
   ]
 }
