@@ -2,7 +2,9 @@ package com.example.dmitryz.todo.presentation.view.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -25,7 +27,9 @@ import butterknife.ButterKnife;
 
 public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder> {
 
-    public interface OnItemClickListener {
+    private MenuItem.OnMenuItemClickListener menuItemClickListener;
+
+    public interface OnItemClickListener extends MenuItem.OnMenuItemClickListener {
         void onToDoItemClicked(ToDoModel todoModel);
     }
 
@@ -64,6 +68,20 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
                 }
             }
         });
+
+        holder.itemView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+            final MenuItem.OnMenuItemClickListener menuItemClickListener = ToDoAdapter.this.menuItemClickListener;
+            @Override
+            public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+                if (menuItemClickListener == null) {
+                    return;
+                }
+
+                menu.setHeaderTitle("Select The Action");
+                menu.add(0, (int)todoModel.getId(), 0, "Delete")
+                        .setOnMenuItemClickListener(menuItemClickListener);//groupId, itemId, order, title
+            }
+        });
     }
 
     private ToDoModel getItem(int position) {
@@ -80,8 +98,12 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
         notifyDataSetChanged();
     }
 
-    public void setOnItemClickListener (OnItemClickListener onItemClickListener) {
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
+    }
+
+    public void setOnItemMenuClickListener(MenuItem.OnMenuItemClickListener menuItemClickListener) {
+        this.menuItemClickListener = menuItemClickListener;
     }
 
     private void validateToDoList(Collection<ToDoModel> todoCollection) {
@@ -89,7 +111,8 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
             throw new IllegalArgumentException("The list cannot be null");
         }
     }
-    public static class ToDoViewHolder extends RecyclerView.ViewHolder {
+
+    public class ToDoViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tv_title)
         TextView textViewTitle;
 
@@ -98,6 +121,4 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
             ButterKnife.bind(this, itemView);
         }
     }
-
-
 }

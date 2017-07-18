@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -222,8 +223,11 @@ public class ToDoListFragment extends BaseFragment implements ToDoListView {
         itemTouchHelper.attachToRecyclerView(rv_todo);
 
         todoAdapter.setOnItemClickListener(onItemClickListener);
+        todoAdapter.setOnItemMenuClickListener(onItemClickListener);
+
         rv_todo.setLayoutManager(new ToDoLayoutManager(context()));
         rv_todo.setAdapter(todoAdapter);
+
 
     }
 
@@ -233,6 +237,15 @@ public class ToDoListFragment extends BaseFragment implements ToDoListView {
 
     private ToDoAdapter.OnItemClickListener onItemClickListener =
             new ToDoAdapter.OnItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    if (ToDoListFragment.this.todoListPresenter != null) {
+                        ToDoListFragment.this.todoListPresenter.removeItemById(item.getItemId());
+                        return true;
+                    }
+                    return false;
+                }
+
                 @Override
                 public void onToDoItemClicked(ToDoModel todoModel) {
                     if (ToDoListFragment.this.todoListPresenter != null && todoModel != null) {

@@ -1,16 +1,6 @@
 {
   "todo":[
     {
-      "id": "1",
-      "title":"item context menu",
-      "body":"show \"delete\" button on hold list item"
-    },
-    {
-      "id": "2",
-      "title":"delete item from context menu",
-      "body":"delete item with context menu"
-    },
-    {
       "id": "3",
       "title":"add sets view",
       "body":"add activity to set manage with context submenu"
@@ -19,6 +9,16 @@
       "id": "4",
       "title":"add floating action button to sets",
       "body":"add \"reload from json\" and \"new set\" actions"
+    },
+    {
+      "id": "5",
+      "title":"edit todo item action",
+      "body":"add \"edit\" action to todo item"
+    },
+    {
+      "id": "6",
+      "title":"allow change order of items in list",
+      "body":"add \"edit\" action to todo item"
     }
   ]
 }

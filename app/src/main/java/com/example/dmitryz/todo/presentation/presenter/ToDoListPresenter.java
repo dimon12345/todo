@@ -127,6 +127,19 @@ public class ToDoListPresenter implements Presenter {
 
     }
 
+    public void removeItemById(int itemId) {
+        int index = -1;
+        int i = 0;
+        for (ToDoModel model: cachedList) {
+            if (model.getId() == itemId) {
+                index = i;
+                break;
+            }
+            ++i;
+        }
+        removeItem(index);
+    }
+
     private class ResetToDoListObserver extends io.reactivex.observers.DisposableObserver<List<ToDoItem>> {
         @Override
         public void onNext(List<ToDoItem> items) {
