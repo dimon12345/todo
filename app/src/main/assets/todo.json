@@ -12,6 +12,11 @@
     },
     {
       "id": "3",
+      "title":"Tap me",
+      "body":"here more detailed info for taped item"
+    },
+    {
+      "id": "4",
       "title":"Red \"plus\" button",
       "body":"Use red \"plus\" button to access other options"
     }
