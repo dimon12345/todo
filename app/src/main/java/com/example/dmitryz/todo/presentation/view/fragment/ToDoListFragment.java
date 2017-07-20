@@ -184,11 +184,6 @@ public class ToDoListFragment extends BaseFragment implements ToDoListView {
     }
 
     @Override
-    public void updateItems() {
-
-    }
-
-    @Override
     public void showError(String message) {
         showToastMessage(message);
     }

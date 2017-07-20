@@ -1,6 +1,7 @@
 package com.example.dmitryz.todo.domain.repository;
 
 import com.example.dmitryz.todo.domain.ToDoItem;
+import com.example.dmitryz.todo.domain.ToDoSet;
 
 import java.util.List;
 
@@ -21,4 +22,6 @@ public interface ToDoRepository {
     Observable<Boolean> reset();
 
     Observable<Boolean> deleteById(long id);
+
+    Observable<List<ToDoSet>> getSets();
 }

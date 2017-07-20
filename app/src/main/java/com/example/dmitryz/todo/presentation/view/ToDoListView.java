@@ -11,11 +11,9 @@ import java.util.List;
 
 public interface ToDoListView extends LoadDataView {
 
-    void renderToDoList(List<ToDoModel> toDoModelCollection);
+    void renderToDoList(List<ToDoModel> toDoModelsList);
 
     void viewToDo(ToDoModel todoModel);
 
     void removeItem(int position);
-
-    void updateItems();
 }

@@ -8,6 +8,7 @@ import com.example.dmitryz.todo.data.entity.mapper.ToDoItemDataMapper;
 import com.example.dmitryz.todo.data.repository.datasource.ToDoDataStore;
 import com.example.dmitryz.todo.data.repository.datasource.ToDoDataStoreFactory;
 import com.example.dmitryz.todo.domain.ToDoItem;
+import com.example.dmitryz.todo.domain.ToDoSet;
 import com.example.dmitryz.todo.domain.repository.ToDoRepository;
 
 import java.util.List;
@@ -75,5 +76,10 @@ public class ToDoDataRepository implements ToDoRepository {
 
     ToDoDataStore getToDoDataStore() {
         return this.toDoDataStoreFactory.createRoomDataStore();
+    }
+
+    @Override
+    public Observable<List<ToDoSet>> getSets() {
+        return null;
     }
 }

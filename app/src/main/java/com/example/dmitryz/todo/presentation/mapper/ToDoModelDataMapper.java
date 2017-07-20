@@ -21,7 +21,7 @@ public class ToDoModelDataMapper {
 
     public ToDoModel transform(ToDoItem todoItem) {
         if (todoItem == null) {
-            throw new IllegalArgumentException("Cannot transform a null value");
+            throw new IllegalArgumentException("Cannot transform a null value of todo item");
         }
 
         long id = Long.parseLong(todoItem.getID());

@@ -44,8 +44,8 @@ public class ToDoListPresenter implements Presenter {
         this.todoModelDataMapper = todoModelDataMapper;
     }
 
-    public void setView(@NonNull ToDoListView view) {
-        this.todoListView = view;
+    public void setView(@NonNull ToDoListView todoListView) {
+        this.todoListView = todoListView;
     }
 
     @Override
@@ -105,11 +105,11 @@ public class ToDoListPresenter implements Presenter {
         todoListView.showError(errorMessage);
     }
 
-    private void showToDoCollectionInView(List<ToDoItem> todoItemsCollection) {
-        final List<ToDoModel> todoModelsCollection =
-                todoModelDataMapper.transform(todoItemsCollection);
-        todoListView.renderToDoList(todoModelsCollection);
-        cachedList = todoModelsCollection;
+    private void showToDoCollectionInView(List<ToDoItem> todoItemsList) {
+        final List<ToDoModel> todoModelsList =
+                todoModelDataMapper.transform(todoItemsList);
+        todoListView.renderToDoList(todoModelsList);
+        cachedList = todoModelsList;
     }
 
     private void getToDoList() {
